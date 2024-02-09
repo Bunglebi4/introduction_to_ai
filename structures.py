@@ -13,7 +13,7 @@ class Node:
         self.zero_idx = idx
 
 #Функция передвижения нуля
-def move(direction, node):
+def move(node, direction):
     state = deepcopy(node.state)
     i, j = node.zero_idx[0], node.zero_idx[1]
     match direction:
@@ -56,12 +56,13 @@ def print_state(node):
     state = node.state
     for i in range(3):
         print(state[i])
+    print("---------")
 
 #Поиск всех детей узла
 def child_nodes(node):
     child_nodes_list = []
     for direction in ["left", "right", "up", "down"]:
-        next_node = move(direction, node)
+        next_node = move(node, direction)
         if next_node != None:
             child_nodes_list.append(next_node)
     return child_nodes_list

@@ -1,8 +1,9 @@
 import collections
+from copy import deepcopy
 from collections import deque
 
 class Node:
-    def __init__(self, action: str, parent = None, depth=0, state=None, idx=(2, 2)) -> None:
+    def __init__(self, action: str, parent=None, depth=0, state=None, idx=(2, 2)) -> None:
         self.state = state if state else [[6, 2, 8], [4, 1, 7], [5, 3, 0]]
         self.parent = parent
         self.action = action
@@ -13,7 +14,8 @@ class Node:
 
 class Action:
     @staticmethod
-    def right(state, node):
+    def right(node):
+        state = deepcopy(node.state)
         i, j = node.zero_idx[0], node.zero_idx[1]
         if j > 1:
             return None
@@ -30,7 +32,8 @@ class Action:
         return next_node
 
     @staticmethod
-    def left(state, node):
+    def left(node):
+        state = deepcopy(node.state)
         i, j = node.zero_idx[0], node.zero_idx[1]
         if j < 1:
             return None
@@ -47,7 +50,8 @@ class Action:
         return next_node
 
     @staticmethod
-    def down(state, node):
+    def down(node):
+        state = deepcopy(node.state)
         i, j = node.zero_idx[0], node.zero_idx[1]
         if i > 1:
             return None
@@ -64,7 +68,8 @@ class Action:
         return next_node
 
     @staticmethod
-    def up(state, node):
+    def up(node):
+        state = deepcopy(node.state)
         i, j = node.zero_idx[0], node.zero_idx[1]
         if i < 1:
             return None

@@ -1,9 +1,10 @@
 from structures import *
 
+def dfs(start):
+    print_state(start)
+    print(check_node(start))
+
+target = Node(action=None, state=TARGET_STATE)
 start = Node(action=None)
-print_state(start)
-next = move(start, "up")
-next = move(next, "left")
-print_state(next)
-for node in child_nodes(next):
-    print_state(node)
+dfs(start)
+dfs(target)

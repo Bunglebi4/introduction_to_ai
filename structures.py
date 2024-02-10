@@ -7,11 +7,11 @@ TARGET_STATE = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
 
 #Класс узла
 class Node:
-    def __init__(self, action: str, parent=None, depth=0, state=None, idx=(2, 2)) -> None:
+    def __init__(self, action: str, parent=None, cost=0, depth=0, state=None, idx=(2, 2)) -> None:
         self.state = state if state else START_STATE
         self.parent = parent
         self.action = action
-        self.cost = 0
+        self.cost = cost
         self.depth = depth
         self.zero_idx = idx
 
@@ -49,25 +49,28 @@ def move(node, direction):
         state=state,
         parent=node,
         action=direction,
-        depth=node.depth + 1,
+        cost=node.cost + 1,
         idx=(i, j)
     )
     return next_node
 
 #Вывод состояния узла
 def print_state(node):
+    print("---------")
     state = node.state
     for i in range(3):
         print(state[i])
+    print("Path-Cost:", node.cost)
+    print("Depth:", node.depth)
     print("---------")
 
 #Поиск всех детей узла
 def child_nodes(node):
-    child_nodes_list = []
-    for direction in ["left", "right", "up", "down"]:
+    child_nodes_list = set()
+    for direction in ["left", "up", "down", "right"]:
         next_node = move(node, direction)
         if next_node != None:
-            child_nodes_list.append(next_node)
+            child_nodes_list.add(next_node)
     return child_nodes_list
 
 #Проверка достижения целевого состояния

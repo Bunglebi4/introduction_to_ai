@@ -41,7 +41,7 @@ def dfs(node, manual, visited=set(), frontier=[], depth=0):
     return None
 
 # Пример использования
-initial_node = Node(action="start")
+initial_node = Node(action=None)
 result_node = dfs(initial_node, False)
 print_state(result_node)
 input("Press Enter")

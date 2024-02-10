@@ -67,7 +67,7 @@ def print_state(node):
 #Поиск всех детей узла
 def child_nodes(node):
     child_nodes_list = set()
-    for direction in ["left", "up", "down", "right"]:
+    for direction in ["left", "right", "up", "down"]:
         next_node = move(node, direction)
         if next_node != None:
             child_nodes_list.add(next_node)

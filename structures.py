@@ -72,6 +72,7 @@ def child_nodes(node):
         if next_node != None:
             child_nodes_list.add(next_node)
     return child_nodes_list
+    print("penis")
 
 #Проверка достижения целевого состояния
 def check_node(node):

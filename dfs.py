@@ -37,7 +37,7 @@ def dfs(node, manual, visited=set(), frontier=[], depth=0):
         result = dfs(child, manual, visited, frontier, depth)
         if result is not None:
             return result
-    
+    print("penis")
     return None
 
 # Пример использования

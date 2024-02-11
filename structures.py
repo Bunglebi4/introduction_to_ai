@@ -66,13 +66,12 @@ def print_state(node):
 
 #Поиск всех детей узла
 def child_nodes(node):
-    child_nodes_list = set()
+    child_nodes_list = []
     for direction in ["left", "right", "up", "down"]:
         next_node = move(node, direction)
         if next_node != None:
-            child_nodes_list.add(next_node)
+            child_nodes_list.append(next_node)
     return child_nodes_list
-    print("penis")
 
 #Проверка достижения целевого состояния
 def check_node(node):

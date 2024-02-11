@@ -3,9 +3,11 @@ import sys
 sys.setrecursionlimit(1000000)
 
 def dfs(node, manual, visited=set(), frontier=[], depth=0):
-    node.depth = depth    
+    node.depth = depth
+    print("Текущая вершина, выбираемая для раскрытия на данном шаге:")
+    print_state(node)
     if check_node(node):
-        print("Достигнута целевое состояние!")
+        print("Достигнуто целевое состояние!")
         return node
     else:
         depth += 1
@@ -13,9 +15,6 @@ def dfs(node, manual, visited=set(), frontier=[], depth=0):
     visited.add(hash(tuple(map(tuple, node.state))))
     children = [child for child in child_nodes(node) if hash(tuple(map(tuple, child.state))) not in visited]
     if manual:
-        print("Текущая вершина, выбираемая для раскрытия на данном шаге:")
-        print_state(node)
-        
         print("Добавленные вершины после раскрытия:")
         for child in children:
             print_state(child)
@@ -37,10 +36,8 @@ def dfs(node, manual, visited=set(), frontier=[], depth=0):
         result = dfs(child, manual, visited, frontier, depth)
         if result is not None:
             return result
-    print("penis")
     return None
 
-# Пример использования
 initial_node = Node(action=None)
 result_node = dfs(initial_node, False)
 print_state(result_node)

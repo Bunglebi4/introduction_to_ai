@@ -42,18 +42,15 @@ def move(node, direction):
     return state
 
 
-# Функция для проверки, достигли ли мы целевого состояния
 def is_goal(state):
     return state == TARGET_STATE
 
-# Эвристическая функция h1 - число фишек, стоящих не на своем месте (используется количество инверсий)
 def h1(state):
     flat_state = [item for sublist in state for item in sublist]
     inversions = sum(1 for i in range(len(flat_state)) for j in range(i + 1, len(flat_state)) if flat_state[i] and flat_state[j] and flat_state[i] > flat_state[j])
     return inversions
 
 
-# Эвристическая функция h2 - суммарное по всем фишкам число шагов до целевого положения (манхэттенское расстояние)
 def h2(state):
     total_distance = 0
     for i in range(3):
@@ -65,12 +62,11 @@ def h2(state):
     return total_distance
 
 
-# Функция для поиска пути с использованием алгоритма A*
 def astar(start_state, heuristic_func):
     start_node = Node(start_state)
-    frontier = deque([(start_node, 0)])  # Очередь с приоритетом, где приоритет - оценка стоимости пути
+    frontier = deque([(start_node, 0)])
     visited = set()
-    visited_states = {}  # Таблица замещения для хранения посещенных состояний и их стоимости
+    visited_states = {}
     while frontier:
         current_node, current_cost = frontier.popleft()
         current_state = current_node.state
@@ -87,11 +83,10 @@ def astar(start_state, heuristic_func):
                     if new_state_tuple not in visited_states or current_cost + 1 < visited_states[new_state_tuple]:
                         frontier.append((new_node, current_cost + 1 + heuristic_func(new_state)))
                         visited_states[new_state_tuple] = current_cost + 1
-                    frontier = deque(sorted(frontier, key=lambda x: x[1]))  # Сортировка очереди по оценке стоимости
+                    frontier = deque(sorted(frontier, key=lambda x: x[1]))
     return None
 
 
-# Функция для вывода пути
 def print_path(node):
     path = []
     while node:
@@ -102,7 +97,6 @@ def print_path(node):
         print_state(state)
 
 
-# Функция для вывода состояния
 def print_state(state):
     for row in state:
         print(row)
@@ -138,5 +132,5 @@ def run_astar(start_state, heuristic_func, need_path=False):
         return
 
 
-run_astar(START_STATE, h1, need_path=True)
+run_astar(START_STATE, h1, )
 run_astar(START_STATE, h2)

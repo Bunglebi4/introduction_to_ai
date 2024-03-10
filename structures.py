@@ -55,7 +55,6 @@ def print_state(node):
     for i in range(3):
         print(state[i])
     print("Path-Cost:", node.cost)
-    print("Depth:", node.depth)
     print("---------")
 
 
